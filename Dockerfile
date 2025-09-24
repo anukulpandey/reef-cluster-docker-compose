@@ -31,4 +31,5 @@ RUN /home/$SSH_USER/scripts/init_binary.sh
 # Expose SSH
 EXPOSE 22
 
-CMD ["/home/${SSH_USER}/scripts/start.sh"]
+CMD /bin/bash -c "/home/$SSH_USER/scripts/start.sh"
+
