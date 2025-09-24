@@ -10,7 +10,7 @@ RUN mkdir /var/run/sshd
 
 # Copy scripts
 COPY scripts/ /home/scripts/
-COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /home/scripts/entrypoint.sh
 RUN chmod +x /home/scripts/*.sh /entrypoint.sh
 
 RUN ./entrypoint.sh
