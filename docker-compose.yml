@@ -17,7 +17,6 @@ services:
     environment:
       SSH_USER: ${SSH_USER}
       SSH_PASS: ${SSH_PASS}
-      IS_BOOTSTRAP: ${IS_BOOTSTRAP}
       P2P_PORT: ${P2P_PORT}
       RPC_PORT: ${RPC_PORT}
       SELF_NODE_P2P_PORT: ${SELF_NODE_P2P_PORT}
