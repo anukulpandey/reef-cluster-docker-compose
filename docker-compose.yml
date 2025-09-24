@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  ssh-server:
+    image: linuxserver/openssh-server:latest
+    container_name: ssh-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+      - PASSWORD_ACCESS=true
+      - USER_NAME=${SSH_USER}
+      - USER_PASSWORD=${SSH_PASS}
+    ports:
+      - "${SSH_PORT}:2222"
+    restart: unless-stopped
+    volumes:
+      - ./ssh-data:/config
