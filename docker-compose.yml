@@ -10,4 +10,6 @@ services:
     container_name: ubuntu-dev
     ports:
       - "${SSH_PORT}:22"
+    volumes:
+      - ./data:/home/${SSH_USER}/data
     restart: unless-stopped
