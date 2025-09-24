@@ -14,8 +14,7 @@ mkdir -p "$DATA_DIR"
 "$BASE_DIR/reef-node" key generate-node-key --file "$DATA_DIR/node.key"
 
 # Start reef-node in a tmux session
-tmux new-session -d -s "$TMUX_SESSION" \
-  "$BASE_DIR/reef-node --base-path $DATA_DIR \
+"$BASE_DIR/reef-node --base-path $DATA_DIR \
   --chain $BASE_DIR/customSpecRaw.json \
   --port 30333 \
   --rpc-port 9944 \

@@ -27,10 +27,9 @@ RUN chmod +x /home/$SSH_USER/scripts/*.sh
 
 # Run the init script
 RUN /home/$SSH_USER/scripts/init_binary.sh
-RUN /home/$SSH_USER/scripts/bootstrap.sh
 
 # Expose SSH
 EXPOSE 22
 
 # Start SSHD
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["/bin/bash", "-c", "/usr/sbin/sshd && tmux new-session -d -s bootstrap '/home/reefuser/scripts/bootstrap.sh' && tail -f /dev/null"]
