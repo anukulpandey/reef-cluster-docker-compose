@@ -5,10 +5,6 @@ RUN apt-get update && apt-get install -y \
     openssh-server sudo wget ca-certificates tmux \
     && rm -rf /var/lib/apt/lists/*
 
-# Build args for SSH user
-ARG SSH_USER=reefuser
-ARG SSH_PASS=reefpass
-
 # Create user
 RUN useradd -m -s /bin/bash $SSH_USER && \
     echo "$SSH_USER:$SSH_PASS" | chpasswd && \
