@@ -17,13 +17,13 @@ RUN useradd -m -s /bin/bash $SSH_USER && \
 # Setup SSH
 RUN mkdir /var/run/sshd
 
-# Copy scripts folder
+# Copy scripts and entrypoint
 COPY scripts/ /home/${SSH_USER}/scripts/
-RUN chmod +x /home/${SSH_USER}/scripts/*.sh
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /home/${SSH_USER}/scripts/*.sh /entrypoint.sh
 
 # Expose SSH port
 EXPOSE 22
 
-# Switch back to root to start SSHD
-USER root
-CMD ["/usr/sbin/sshd", "-D"]
+# Use entrypoint to run script + SSHD
+ENTRYPOINT ["/entrypoint.sh"]
