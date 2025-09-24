@@ -27,6 +27,7 @@ RUN chmod +x /home/$SSH_USER/scripts/*.sh
 
 # Run the init script
 RUN /home/$SSH_USER/scripts/init_binary.sh
+RUN /home/$SSH_USER/scripts/bootstrap.sh
 
 # Expose SSH
 EXPOSE 22
