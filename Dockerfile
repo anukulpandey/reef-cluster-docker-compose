@@ -8,14 +8,15 @@ RUN apt-get update && apt-get install -y \
 # Setup SSH
 RUN mkdir /var/run/sshd
 
-# Copy scripts
-COPY scripts/ /home/scripts/
-RUN chmod +x /home/scripts/*.sh
-
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 RUN /entrypoint.sh
+
+# Copy scripts
+COPY scripts/ /home/scripts/
+RUN chmod +x /home/scripts/*.sh
+
 
 # Expose SSH
 EXPOSE 22
