@@ -12,7 +12,7 @@ RUN mkdir /var/run/sshd
 COPY scripts/ /home/scripts/
 RUN chmod +x /home/scripts/*.sh
 
-RUN ./home/script/entrypoint.sh
+RUN ./home/scripts/entrypoint.sh
 
 # Expose SSH
 EXPOSE 22
