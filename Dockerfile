@@ -8,13 +8,15 @@ RUN apt-get update && apt-get install -y \
 # Setup SSH
 RUN mkdir /var/run/sshd
 
-# Copy scripts and entrypoint
+# Copy scripts
 COPY scripts/ /home/scripts/
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /home/scripts/*.sh /entrypoint.sh
 
+RUN ./entrypoint.sh
+
 # Expose SSH
 EXPOSE 22
 
-# Run entrypoint
-ENTRYPOINT ["/entrypoint.sh"]
+# Keep SSHD running as the main command
+CMD ["/usr/sbin/sshd", "-D"]
