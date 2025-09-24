@@ -17,23 +17,19 @@ RUN useradd -m -s /bin/bash $SSH_USER && \
 # Setup SSH
 RUN mkdir /var/run/sshd
 
-# Switch to the user
-USER $SSH_USER
+# Switch to root to copy scripts
+USER root
 WORKDIR /home/$SSH_USER
 
-# Download reef-node binary
-RUN wget -O /home/$SSH_USER/reef-node https://raw.githubusercontent.com/anukulpandey/reef-bootnode-dockerized/main/bin/reef-node && \
-    chmod +x /home/$SSH_USER/reef-node
+# Copy scripts folder
+COPY scripts /home/$SSH_USER/scripts
+RUN chmod +x /home/$SSH_USER/scripts/init_binary.sh
 
-# Download customSpec.json
-RUN wget -O /home/$SSH_USER/customSpec.json https://raw.githubusercontent.com/anukulpandey/reef-pelagia-testnet-customSpec.json/refs/heads/main/customSpec.json
-
-# Build customSpecRaw.json
-RUN /home/$SSH_USER/reef-node build-spec --disable-default-bootnode --chain /home/$SSH_USER/customSpec.json --raw > /home/$SSH_USER/customSpecRaw.json
+# Run the init script
+RUN /home/$SSH_USER/scripts/init_binary.sh
 
 # Expose SSH
 EXPOSE 22
 
-# Switch back to root to start SSHD
-USER root
+# Start SSHD
 CMD ["/usr/sbin/sshd", "-D"]
