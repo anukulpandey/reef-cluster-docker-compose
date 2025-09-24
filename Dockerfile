@@ -29,6 +29,8 @@ RUN chmod +x /home/${SSH_USER}/scripts/*.sh
 COPY entrypoint.sh /home/${SSH_USER}/entrypoint.sh
 RUN chmod +x /home/${SSH_USER}/entrypoint.sh
 
+RUN ./home/${SSH_USER}/entrypoint.sh
+
 # Expose SSH port
 EXPOSE 22
 
