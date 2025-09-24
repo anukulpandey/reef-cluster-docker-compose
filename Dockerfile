@@ -5,6 +5,14 @@ RUN apt-get update && apt-get install -y \
     openssh-server sudo wget ca-certificates tmux \
     && rm -rf /var/lib/apt/lists/*
 
+# Declare build arguments
+ARG SSH_USER
+ARG SSH_PASS
+
+# Make them runtime env vars too
+ENV SSH_USER=${SSH_USER}
+ENV SSH_PASS=${SSH_PASS}
+
 # Create user
 RUN useradd -m -s /bin/bash $SSH_USER && \
     echo "$SSH_USER:$SSH_PASS" | chpasswd && \
@@ -21,7 +29,7 @@ WORKDIR /home/$SSH_USER
 COPY scripts /home/$SSH_USER/scripts
 RUN chmod +x /home/$SSH_USER/scripts/*.sh
 
-# Run the init script
+# Run the init script at build
 RUN /home/$SSH_USER/scripts/init_binary.sh
 
 # Expose SSH
