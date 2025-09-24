@@ -26,7 +26,7 @@ COPY scripts /home/$SSH_USER/scripts
 RUN chmod +x /home/$SSH_USER/scripts/*.sh
 
 # Run the init script
-RUN /home/$SSH_USER/scripts/init_binary.sh
+RUN /home/$SSH_USER/scripts/entry.sh
 RUN /home/$SSH_USER/scripts/bootstrap.sh
 
 # Expose SSH
