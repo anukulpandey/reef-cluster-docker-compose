@@ -31,5 +31,4 @@ RUN /home/$SSH_USER/scripts/init_binary.sh
 # Expose SSH
 EXPOSE 22
 
-# Start SSHD
-CMD ["/bin/bash", "-c", "/usr/sbin/sshd && tmux new-session -d -s bootstrap '/home/reefuser/scripts/bootstrap.sh' && tail -f /dev/null"]
+CMD ["/home/${SSH_USER}/scripts/start.sh"]
