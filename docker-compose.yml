@@ -7,12 +7,21 @@ services:
       args:
         SSH_USER: ${SSH_USER}
         SSH_PASS: ${SSH_PASS}
-    container_name: "${CONTAINER_NAME:-ubuntu-dev}"
+    container_name: "${CONTAINER_NAME}"
     ports:
       - "${SSH_PORT}:22"
+      - "${P2P_PORT}:${P2P_PORT}"
+      - "${RPC_PORT}:${RPC_PORT}"
+      - "${SELF_NODE_P2P_PORT}:${SELF_NODE_P2P_PORT}"
+      - "${SELF_NODE_RPC_PORT}:${SELF_NODE_RPC_PORT}"
     environment:
       SSH_USER: ${SSH_USER}
       SSH_PASS: ${SSH_PASS}
+      IS_BOOTSTRAP: ${IS_BOOTSTRAP}
+      P2P_PORT: ${P2P_PORT}
+      RPC_PORT: ${RPC_PORT}
+      SELF_NODE_P2P_PORT: ${SELF_NODE_P2P_PORT}
+      SELF_NODE_RPC_PORT: ${SELF_NODE_RPC_PORT}
     volumes:
       - ./data:/home/${SSH_USER}/data
     restart: unless-stopped
