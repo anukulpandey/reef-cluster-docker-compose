@@ -4,12 +4,12 @@ services:
   ubuntu-dev:
     build:
       context: .
-      args:
-        SSH_USER: ${SSH_USER}
-        SSH_PASS: ${SSH_PASS}
     container_name: ubuntu-dev
     ports:
       - "${SSH_PORT}:22"
     volumes:
       - ./data:/home/${SSH_USER}/data
     restart: unless-stopped
+    environment:
+      SSH_USER: ${SSH_USER}
+      SSH_PASS: ${SSH_PASS}
